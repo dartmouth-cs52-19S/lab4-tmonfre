@@ -1,9 +1,67 @@
 body, html {
     font-family: "Roboto", sans-serif;
-    background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
     height: 100%;
+    // background-color: #3E92CC;
+    background-color: #63ADE2;
 }
 
-.active {
-    color: pink;
+nav {
+
+    ul {
+        list-style: none;
+        margin-left: 15px;
+        padding-left: 0;
+    }
+
+    li a {
+        color: #0A2463;
+        text-decoration: none;
+    }
+
+    li a:hover {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+.post-preview-area {
+    display: flex;
+    flex-wrap: wrap;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.post-preview {
+    width: 20vw;
+    height: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    transition: 0.25s;
+    background-color: #FFFAFF;
+    cursor: pointer;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .text-preview-section {
+        padding: 5px;
+
+        h3 {
+            margin-top: 2px;
+            color: #D8315B;
+        }
+
+        p {
+            color: #1E1B18;
+        }
+    }
+}
+
+.post-preview:hover {
+   /* box shadow adapted from: https://www.w3schools.com/cssref/css3_pr_box-shadow.asp */
+   box-shadow: 0px 0px 20px #1E1B18;
 }
