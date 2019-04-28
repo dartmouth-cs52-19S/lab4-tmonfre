@@ -1,27 +1,41 @@
 body, html {
-    font-family: "Roboto", sans-serif;
+    font-family: "Open Sans", sans-serif;
     height: 100%;
     // background-color: #3E92CC;
-    background-color: #63ADE2;
+    background-color: #90caf9;
+
+    h1 {
+        font-family: "Lato", sans-serif;
+    }
 }
 
 nav {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5px;
 
-    ul {
-        list-style: none;
-        margin-left: 15px;
-        padding-left: 0;
+    h1 {
+        font-size: 2em;
+        margin-left: 10px;
     }
 
-    li a {
+    a {
         color: #0A2463;
         text-decoration: none;
     }
 
-    li a:hover {
-        color: white;
-        text-decoration: underline;
+    .fab {
+        margin-right: 40px;
+        margin-top: 20px;
     }
+}
+
+#nav-line {
+    height: 1px;
+    width: calc(100% - 50px);
+    margin-left: 20px;
+    margin-bottom: 30px;
+    background-color: #0A2463;
 }
 
 .post-preview-area {
@@ -30,14 +44,18 @@ nav {
 
     a {
         text-decoration: none;
+        margin: 0;
+        padding: 0;
     }
 }
 
 .post-preview {
     width: 20vw;
+    min-width: 250px;
     height: auto;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 20px;
     transition: 0.25s;
     background-color: #FFFAFF;
     cursor: pointer;
@@ -48,7 +66,7 @@ nav {
     }
 
     .text-preview-section {
-        padding: 5px;
+        padding: 10px;
 
         h3 {
             margin-top: 2px;
@@ -64,4 +82,85 @@ nav {
 .post-preview:hover {
    /* box shadow adapted from: https://www.w3schools.com/cssref/css3_pr_box-shadow.asp */
    box-shadow: 0px 0px 20px #1E1B18;
+}
+
+.view-post {
+    margin-left: 20px;
+    color: #0A2463;
+
+    .content {
+        min-height: calc(100vh - 290px);
+        margin-bottom: 50px;
+
+        h1 {
+            margin-top: 5px;
+            color: #D8315B;
+        }
+
+        #display-content {
+            margin-top: 30px;
+            // adopted from: https://stackoverflow.com/questions/9492249/render-a-string-in-html-and-preserve-spaces-and-linebreaks
+            white-space: pre-wrap;
+        }
+    }
+
+    .bottom {
+
+        .line {
+            height: 1px;
+            width: 100%;
+            width: 95vw;
+            margin-bottom: 20px;
+            background-color: #0A2463;
+        }
+    
+        .fab {
+            margin-bottom: 20px;
+
+            i {
+                font-size: 19px;
+            }
+        }
+    }
+}
+
+#buttons {
+    .fab {
+        margin-right: 10px;
+    }
+}
+
+#edit, #add {
+    h3 {
+        margin-bottom: 0px;
+        font-weight: bold;
+    }
+
+    input, textarea {
+        margin-top: 5px;
+        width: 300px;
+        height: 35px;
+        border-radius: 5px;
+        // adopted from: https://stackoverflow.com/questions/12791631/remove-inner-shadow-of-text-input
+        border: none;
+        padding: 0px 5px;
+    }
+
+    textarea {
+        padding-top: 10px;
+        width: 700px;
+        height: 300px;
+    }
+
+    input:focus {
+        outline: none;
+        /* box shadow adapted from: https://www.w3schools.com/cssref/css3_pr_box-shadow.asp */
+        box-shadow: 0px 5px 10px rgba(68, 63, 58, 0.5)
+    }
+}
+
+#error-message {
+    h1 {
+        color: #D8315B;
+    }
 }

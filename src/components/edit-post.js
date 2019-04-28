@@ -1,42 +1,38 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { createPost } from '../actions';
-
-class NewPost extends React.Component {
+export default class EditPost extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      title: '',
-      tags: '',
-      content: '',
-      cover_url: '',
+      title: this.props.post.title,
+      tags: this.props.post.tags,
+      content: this.props.post.content,
+      cover_url: this.props.post.cover_url,
     };
   }
 
-  addPost = () => {
+  updatePost = () => {
     if (this.state.title.length === 0 || this.state.tags.length === 0 || this.state.content.length === 0 || this.state.cover_url.length === 0) {
       toast.info('You haven\'t filled out all the fields');
     } else {
-      this.props.createPost({
+      this.props.updatePost({
         title: this.state.title,
         tags: this.state.tags,
         content: this.state.content,
         cover_url: this.state.cover_url,
-      }, this.props.history);
+      });
     }
   }
 
   render() {
     return (
-      <div className="view-post">
-        <div id="add" className="content">
+      <div>
+        <div id="edit" className="content">
           <h3>Title</h3>
           <input type="text" value={this.state.title} onChange={(event) => { this.setState({ title: event.target.value }); }} />
 
@@ -44,7 +40,7 @@ class NewPost extends React.Component {
           <input type="text" value={this.state.tags} onChange={(event) => { this.setState({ tags: event.target.value }); }} />
 
           <h3>Content</h3>
-          <textarea name="content" value={this.state.content} onChange={(event) => { this.setState({ content: event.target.value }); }} />
+          <textarea name="content" rows="1" value={this.state.content} onChange={(event) => { this.setState({ content: event.currentTarget.value }); }} />
 
           <h3>Cover URL</h3>
           <input type="text" value={this.state.cover_url} onChange={(event) => { this.setState({ cover_url: event.target.value }); }} />
@@ -53,7 +49,7 @@ class NewPost extends React.Component {
           <div className="line" />
           <div id="buttons">
             {/* adopted from: https://codesandbox.io/s/9yp4yk6qno */}
-            <Fab color="secondary" aria-label="Complete" onClick={this.addPost} className="fab">
+            <Fab color="secondary" aria-label="Complete" onClick={this.updatePost} className="fab">
               <Icon><i className="fas fa-check" /></Icon>
             </Fab>
           </div>
@@ -63,7 +59,3 @@ class NewPost extends React.Component {
     );
   }
 }
-
-// react-redux glue -- outputs Container that know state in props
-// also with an optional HOC withRouter
-export default withRouter(connect(null, { createPost })(NewPost));

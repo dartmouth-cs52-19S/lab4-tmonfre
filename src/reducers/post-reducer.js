@@ -3,6 +3,7 @@ import { ActionTypes } from '../actions';
 const initialState = {
   all: [],
   current: {},
+  errorMessage: '',
 };
 
 const PostReducer = (state = initialState, action) => {
@@ -12,6 +13,9 @@ const PostReducer = (state = initialState, action) => {
 
     case ActionTypes.FETCH_POST:
       return { ...state, current: action.payload };
+
+    case ActionTypes.API_ERROR:
+      return { ...state, errorMessage: action.payload };
 
     default:
       return state;
