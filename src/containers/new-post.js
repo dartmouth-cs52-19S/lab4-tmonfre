@@ -26,7 +26,7 @@ class NewPost extends React.Component {
     } else {
       this.props.createPost({
         title: this.state.title,
-        tags: this.state.tags,
+        tags: this.state.tags.split(/[ ,]+/),
         content: this.state.content,
         cover_url: this.state.cover_url,
       }, this.props.history);

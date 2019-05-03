@@ -40,7 +40,6 @@ class Post extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     if (this.props.errorMessage) {
       return (
         <div className="view-post" id="error-message">

@@ -8,7 +8,7 @@ const PostPreview = (props) => {
         <img src={props.post.cover_url} alt={props.post.title} />
         <div className="text-preview-section">
           <h3>{props.post.title}</h3>
-          <p>{props.post.tags}</p>
+          <p>{props.post.tags.join(' ')}</p>
         </div>
       </div>
     </Link>

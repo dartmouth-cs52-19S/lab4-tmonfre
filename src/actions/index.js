@@ -47,7 +47,7 @@ export function createPost(post, history) {
 export function updatePost(id, post) {
   return (dispatch) => {
     axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, post).then((response) => {
-      dispatch({ type: 'FETCH_POST', payload: response.data });
+      dispatch({ type: 'FETCH_POST', payload: response.data.result });
     }).catch((error) => {
       dispatch({ type: 'API_ERROR', payload: error.message });
     });

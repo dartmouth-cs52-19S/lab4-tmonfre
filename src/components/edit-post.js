@@ -10,7 +10,7 @@ export default class EditPost extends React.Component {
 
     this.state = {
       title: this.props.post.title,
-      tags: this.props.post.tags,
+      tags: this.props.post.tags.join(' '),
       content: this.props.post.content,
       cover_url: this.props.post.cover_url,
     };
@@ -22,7 +22,7 @@ export default class EditPost extends React.Component {
     } else {
       this.props.updatePost({
         title: this.state.title,
-        tags: this.state.tags,
+        tags: this.state.tags.split(/[ ,]+/),
         content: this.state.content,
         cover_url: this.state.cover_url,
       });
