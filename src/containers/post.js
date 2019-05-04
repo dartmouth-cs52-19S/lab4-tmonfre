@@ -5,10 +5,14 @@ import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { fetchPost, deletePost, updatePost } from '../actions';
+import {
+  fetchPost, deletePost, updatePost, addComment, deleteComment,
+} from '../actions';
 
 import EditPost from '../components/edit-post';
 import ViewPost from '../components/view-post';
+import Comment from '../components/comment';
+import AddComment from '../components/add-comment';
 
 class Post extends React.Component {
   constructor(props) {
@@ -39,6 +43,22 @@ class Post extends React.Component {
     });
   }
 
+  renderComments = (comments) => {
+    if (comments) {
+      return comments.map((comment) => {
+        return <Comment item={comment} key={comment.timestring} deleteComment={this.deleteComment} />;
+      });
+    } else return null;
+  }
+
+  addComment = (comment) => {
+    this.props.addComment(this.props.post.id, comment);
+  }
+
+  deleteComment = (comment) => {
+    this.props.deleteComment(this.props.post.id, comment);
+  }
+
   render() {
     if (this.props.errorMessage) {
       return (
@@ -59,6 +79,16 @@ class Post extends React.Component {
           <ViewPost post={this.props.post} deletePost={this.props.deletePost} toggleEditMode={this.toggleEditMode} history={this.props.history} />
           <div className="bottom">
             <div className="line" />
+
+            <div>
+              <div className="commentsArea">
+                <h2>Comments:</h2>
+                {this.renderComments(this.props.post.comments)}
+                <AddComment addComment={this.addComment} />
+              </div>
+              <div className="line" />
+            </div>
+
             <div id="buttons">
               {/* adopted from: https://codesandbox.io/s/9yp4yk6qno */}
               <Fab color="secondary" aria-label="Edit" onClick={this.toggleEditMode} className="fab">
@@ -82,4 +112,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { fetchPost, deletePost, updatePost })(Post));
+export default withRouter(connect(mapStateToProps, {
+  fetchPost, deletePost, updatePost, addComment, deleteComment,
+})(Post));

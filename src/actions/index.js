@@ -54,6 +54,27 @@ export function updatePost(id, post) {
   };
 }
 
+export function addComment(id, comment) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/addcomment/${id}${API_KEY}`, { comment }).then((response) => {
+      dispatch({ type: 'FETCH_POST', payload: response.data.result });
+    }).catch((error) => {
+      dispatch({ type: 'API_ERROR', payload: error.message });
+    });
+  };
+}
+
+export function deleteComment(id, comment) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/deletecomment/${id}${API_KEY}`, { comment }).then((response) => {
+      dispatch({ type: 'FETCH_POST', payload: response.data.result });
+    }).catch((error) => {
+      dispatch({ type: 'API_ERROR', payload: error.message });
+    });
+  };
+}
+
+
 export function deletePost(id, history) {
   return (dispatch) => {
     axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {

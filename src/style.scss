@@ -89,7 +89,7 @@ nav {
     color: #0A2463;
 
     .content {
-        min-height: calc(100vh - 290px);
+        min-height: calc(100vh - 310px);
         margin-bottom: 50px;
 
         h1 {
@@ -101,6 +101,43 @@ nav {
             margin-top: 30px;
             // adopted from: https://stackoverflow.com/questions/9492249/render-a-string-in-html-and-preserve-spaces-and-linebreaks
             white-space: pre-wrap;
+        }
+    }
+
+    .commentsArea {
+        margin-bottom: 30px;
+
+        .add-comment {
+            input {
+                width: 350px;
+                height: 20px;
+                padding: 5px;
+                border: none;
+                border-radius: 5px;
+            }
+
+            button {
+                height: 30px;
+                background-color: white;
+                border: none;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+        }
+
+        .comment {
+            .timestring {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+
+            .delete-comment {
+                font-size: 12px;
+                text-decoration: underline;
+                font-style: italic;
+                cursor: pointer;
+                margin-bottom: 30px;
+            }
         }
     }
 
