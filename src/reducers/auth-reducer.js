@@ -14,7 +14,6 @@ const AuthReducer = (state = initialState, action) => {
       return { ...state, authenticated: false, userData: {} };
 
     case ActionTypes.AUTH_ERROR:
-      console.log(action.payload);
       return {
         ...state, authenticated: false, userData: {},
       };

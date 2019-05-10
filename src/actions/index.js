@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
-// const ROOT_URL = 'https://cs52-tmonfre-lab5.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'https://cs52-tmonfre-lab5.herokuapp.com/api';
 const API_KEY = '?key=tmonfre';
 
 // keys for actiontypes
@@ -143,7 +143,6 @@ export function signupUser(user, history) {
         history.push('/');
       })
       .catch((error) => {
-        console.log(error.response);
         dispatch({ type: 'API_ERROR', payload: `Sign up failed: ${error.response ? error.response.data : error.message}` });
         history.push('/');
       });

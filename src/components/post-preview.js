@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PostPreview = (props) => {
-  console.log(props.post);
   return (
     <Link to={`/posts/${props.post.id}`}>
       <div className="post-preview">
