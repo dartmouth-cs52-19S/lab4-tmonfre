@@ -17,6 +17,9 @@ const PostReducer = (state = initialState, action) => {
     case ActionTypes.API_ERROR:
       return { ...state, errorMessage: action.payload };
 
+    case ActionTypes.CLEAR_ERROR_MESSAGE:
+      return { ...state, errorMessage: '' };
+
     default:
       return state;
   }

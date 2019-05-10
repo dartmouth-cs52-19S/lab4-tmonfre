@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { fetchPosts } from '../actions';
-
+import Button from '@material-ui/core/Button';
+import { fetchPosts, clearErrorMessage } from '../actions';
 import PostPreview from '../components/post-preview';
 
 class Posts extends React.Component {
@@ -18,18 +18,38 @@ class Posts extends React.Component {
   }
 
   render() {
-    return (
-      <div className="post-preview-area">
-        {this.renderPreviews()}
-      </div>
-    );
+    if (this.props.errorMessage) {
+      return (
+        <div className="view-post" id="error-message">
+          <h1>Uh oh! Looks like there was an error with the API...</h1>
+          <p>{this.props.errorMessage}</p>
+
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            id="clear-error-button"
+            onClick={this.props.clearErrorMessage}
+          >
+            Clear Error
+          </Button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="post-preview-area">
+          {this.renderPreviews()}
+        </div>
+      );
+    }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     posts: state.posts.all,
+    errorMessage: state.posts.errorMessage,
   };
 };
 
-export default withRouter(connect(mapStateToProps, { fetchPosts })(Posts));
+export default withRouter(connect(mapStateToProps, { fetchPosts, clearErrorMessage })(Posts));
