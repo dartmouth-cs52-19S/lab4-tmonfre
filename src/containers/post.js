@@ -51,6 +51,20 @@ class Post extends React.Component {
     } else return null;
   }
 
+  renderCommentSection = () => {
+    if (Object.keys(this.props.userData).length > 0) {
+      return (
+        <div>
+          <div className="commentsArea">
+            <h2>Comments:</h2>
+            {this.renderComments(this.props.post.comments)}
+            <AddComment addComment={this.addComment} />
+          </div>
+        </div>
+      );
+    } else return null;
+  }
+
   renderButtons = () => {
     if (this.props.post.author) {
       if (this.props.post.author.id === this.props.userData.id) {
@@ -100,15 +114,7 @@ class Post extends React.Component {
           <ViewPost post={this.props.post} deletePost={this.props.deletePost} toggleEditMode={this.toggleEditMode} history={this.props.history} />
           <div className="bottom">
             <div className="line" />
-
-            <div>
-              <div className="commentsArea">
-                <h2>Comments:</h2>
-                {this.renderComments(this.props.post.comments)}
-                <AddComment addComment={this.addComment} />
-              </div>
-            </div>
-
+            {this.renderCommentSection()}
             {this.renderButtons()}
           </div>
         </div>

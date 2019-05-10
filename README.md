@@ -21,3 +21,25 @@ I added an action `API_ERROR` for handling errors from `axios`. This basically w
 A user can't create a post unless all the fields are filled in. A warning appears if this happens. See below for an example:
 
 ![screenshot](input-validation.png)
+
+---
+
+# Lab 5 Changes :clipboard:
+
+## What I Did
+To modify the front-end for the changes coming from lab 5, I added login and sign-up routes, and changed the navbar to reflect this. I also added an `auth-reducer` to handle all redux actions regarding authentication. I also modified the way comments are displayed and handled. You can view the site live at [tmonfre-blog.surge.sh](https://tmonfre-blog.surge.sh).
+
+## What Worked / Didn't Work
+After implementing the necessary routes, models, and controllers on the backend, I began by developing a system for users to login/sign up. Once I had this in place, I then began adding features/customizations with this authentication.
+
+I added the username of the person who authored each blog post to the preview and display of the post. Only the person who created each post can edit or delete it. I also added the ability to see who authored each comment. Only the creator of a comment can delete it.
+
+I had some troubles with getting the comments to delete. It turns out it was a problem with my controller on the backend.
+
+## Extra Credit
+
+### Handling Auth Errors
+I added an action for handling auth errors on the frontend. Users can see the error that is received when they request an invalid action.
+
+## Permissions
+Users can only edit/delete the posts they've created. Users can only delete comments they've created, regardless of the owner of the post. If you're not signed in, you can't leave a comment.
