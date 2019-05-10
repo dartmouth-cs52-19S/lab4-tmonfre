@@ -12,22 +12,27 @@ class SignUp extends React.Component {
 
     this.state = {
       email: '',
+      username: '',
       password: '',
       passwordConfirm: '',
     };
   }
 
   signUp = () => {
-    if (this.state.email.length > 0 && this.state.password.length > 0 && this.state.passwordConfirm.length > 0) {
+    if (this.state.email.length > 0 && this.state.username.length > 0 && this.state.password.length > 0 && this.state.passwordConfirm.length > 0) {
       if (this.state.password === this.state.passwordConfirm) {
         if (this.state.password.length >= 8) {
-          if (this.checkEmailFormat(this.state.email)) {
-            this.props.signupUser(this.state, this.props.history);
+          if (this.state.username.length <= 15) {
+            if (this.checkEmailFormat(this.state.email)) {
+              this.props.signupUser(this.state, this.props.history);
+            } else {
+              toast.error('Email not properly formatted');
+            }
           } else {
-            toast.error('Email not properly formatted');
+            toast.error('Username can be maximum 15 characters long');
           }
         } else {
-          toast.error('Passwords must be at least 8 characters long');
+          toast.error('Password must be at least 8 characters long');
         }
       } else {
         toast.error('Passwords don\'t match');
@@ -51,11 +56,16 @@ class SignUp extends React.Component {
           <h3>Email</h3>
           <input type="text" value={this.state.email} onChange={(event) => { this.setState({ email: event.target.value }); }} />
 
+          <h3>Username</h3>
+          <input type="text" value={this.state.username} onChange={(event) => { this.setState({ username: event.target.value }); }} />
+
           <h3>Password</h3>
           <input type="password" value={this.state.password} onChange={(event) => { this.setState({ password: event.target.value }); }} />
 
           <h3>Confirm Password</h3>
           <input type="password" value={this.state.passwordConfirm} onChange={(event) => { this.setState({ passwordConfirm: event.target.value }); }} />
+
+
         </div>
         <div className="bottom">
           <div className="line" />

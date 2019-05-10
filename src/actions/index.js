@@ -61,7 +61,7 @@ export function updatePost(id, post) {
 
 export function addComment(id, comment) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/addcomment/${id}${API_KEY}`, { comment }).then((response) => {
+    axios.post(`${ROOT_URL}/addcomment/${id}${API_KEY}`, { comment }, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
       dispatch({ type: 'FETCH_POST', payload: response.data.result });
     }).catch((error) => {
       dispatch({ type: 'API_ERROR', payload: error.message });
@@ -71,7 +71,7 @@ export function addComment(id, comment) {
 
 export function deleteComment(id, comment) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/deletecomment/${id}${API_KEY}`, { comment }).then((response) => {
+    axios.post(`${ROOT_URL}/deletecomment/${id}${API_KEY}`, comment, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
       dispatch({ type: 'FETCH_POST', payload: response.data.result });
     }).catch((error) => {
       dispatch({ type: 'API_ERROR', payload: error.message });
@@ -113,13 +113,13 @@ export function signinUser(user, history) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signin`, user, { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
-        dispatch({ type: ActionTypes.AUTH_USER, payload: user.email });
+        dispatch({ type: ActionTypes.AUTH_USER, payload: JSON.stringify(response.data.userData) });
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('email', user.email);
+        localStorage.setItem('user', JSON.stringify(response.data.userData));
         history.push('/');
       })
       .catch((error) => {
-        dispatch({ type: 'API_ERROR', payload: `Sign in failed: ${error.response.data}` });
+        dispatch({ type: 'API_ERROR', payload: `Sign in failed: ${error.response ? error.response.data : error.message}` });
         history.push('/');
       });
   };
@@ -137,14 +137,14 @@ export function signupUser(user, history) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, user)
       .then((response) => {
-        dispatch({ type: ActionTypes.AUTH_USER, payload: user.email });
+        dispatch({ type: ActionTypes.AUTH_USER, payload: JSON.stringify(response.data.userData) });
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('email', user.email);
+        localStorage.setItem('user', JSON.stringify(response.data.userData));
         history.push('/');
       })
       .catch((error) => {
         console.log(error.response);
-        dispatch({ type: 'API_ERROR', payload: `Sign up failed: ${error.response.data}` });
+        dispatch({ type: 'API_ERROR', payload: `Sign up failed: ${error.response ? error.response.data : error.message}` });
         history.push('/');
       });
   };

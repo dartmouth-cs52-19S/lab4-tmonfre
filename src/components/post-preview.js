@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PostPreview = (props) => {
+  console.log(props.post);
   return (
     <Link to={`/posts/${props.post.id}`}>
       <div className="post-preview">
@@ -9,6 +10,11 @@ const PostPreview = (props) => {
         <div className="text-preview-section">
           <h3>{props.post.title}</h3>
           <p>{props.post.tags.join(' ')}</p>
+        </div>
+        <div className="separator-line" />
+        <div className="username-preview-section">
+          <p>{`Author: ${props.post.author.username}`}</p>
+          <p>{new Date(props.post.timestamp).toDateString()}</p>
         </div>
       </div>
     </Link>

@@ -46,13 +46,34 @@ class Post extends React.Component {
   renderComments = (comments) => {
     if (comments) {
       return comments.map((comment) => {
-        return <Comment item={comment} key={comment.timestring} deleteComment={this.deleteComment} />;
+        return <Comment item={comment} key={comment.timestamp} deleteComment={this.deleteComment} author={this.props.userData.username} />;
       });
     } else return null;
   }
 
+  renderButtons = () => {
+    if (this.props.post.author) {
+      if (this.props.post.author.id === this.props.userData.id) {
+        return (
+          <div id="buttons">
+            <div className="line" />
+            {/* adopted from: https://codesandbox.io/s/9yp4yk6qno */}
+            <Fab color="secondary" aria-label="Edit" onClick={this.toggleEditMode} className="fab">
+              <Icon><i className="fas fa-pen" /></Icon>
+            </Fab>
+            <Fab aria-label="Delete" onClick={() => { this.props.deletePost(this.props.post._id, this.props.history); }} className="fab">
+              <DeleteIcon />
+            </Fab>
+          </div>
+        );
+      } else return null;
+    } else return null;
+  }
+
   addComment = (comment) => {
-    this.props.addComment(this.props.post.id, comment);
+    if (comment.length > 0) {
+      this.props.addComment(this.props.post.id, comment);
+    }
   }
 
   deleteComment = (comment) => {
@@ -86,18 +107,9 @@ class Post extends React.Component {
                 {this.renderComments(this.props.post.comments)}
                 <AddComment addComment={this.addComment} />
               </div>
-              <div className="line" />
             </div>
 
-            <div id="buttons">
-              {/* adopted from: https://codesandbox.io/s/9yp4yk6qno */}
-              <Fab color="secondary" aria-label="Edit" onClick={this.toggleEditMode} className="fab">
-                <Icon><i className="fas fa-pen" /></Icon>
-              </Fab>
-              <Fab aria-label="Delete" onClick={() => { this.props.deletePost(this.props.post._id, this.props.history); }} className="fab">
-                <DeleteIcon />
-              </Fab>
-            </div>
+            {this.renderButtons()}
           </div>
         </div>
       );
@@ -109,6 +121,7 @@ const mapStateToProps = (state) => {
   return {
     post: state.posts.current,
     errorMessage: state.posts.errorMessage,
+    userData: state.auth.userData,
   };
 };
 

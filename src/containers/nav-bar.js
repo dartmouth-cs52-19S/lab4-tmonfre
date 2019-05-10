@@ -32,7 +32,7 @@ const NavBar = (props) => {
     } else {
       return (
         <div id="auth-links">
-          <h4>{`Welcome ${props.email}!`}</h4>
+          <h4>{`Welcome ${props.userData.username}!`}</h4>
           <h3 onClick={() => { props.signoutUser(props.history); }}>Sign Out</h3>
         </div>
       );
@@ -64,7 +64,7 @@ const NavBar = (props) => {
 const mapStateToProps = (state) => {
   return {
     authenticated: state.auth.authenticated,
-    email: state.auth.email,
+    userData: state.auth.userData,
   };
 };
 
